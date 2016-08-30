@@ -18,6 +18,7 @@ namespace Watch1159
 	{
 		protected List<VertexPositionColorNormal> vertices = new List<VertexPositionColorNormal>();
 		protected List<ushort> indices = new List<ushort>();
+		protected Dictionary<string, List<IndicatorGroup> > indicatorView = new Dictionary<string, List<IndicatorGroup>>();
 		public VertexBuffer vertexBuffer { get; set;}
 		public IndexBuffer indexBuffer { get; set;}
 		// added
@@ -120,5 +121,11 @@ namespace Watch1159
 			}
 		}
 		// bounding box testing =============================================
+
+		// indicator drawing
+		public void DrawIndicator(Effect effect, string view) {
+			foreach (IndicatorGroup inds in indicatorView[view])
+				inds.Draw (effect);
+		}
 	}
 }

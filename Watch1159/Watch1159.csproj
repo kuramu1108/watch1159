@@ -31,7 +31,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -39,6 +38,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,8 +59,6 @@
     <Compile Include="Source\BoundingBoxBuffers.cs" />
     <Compile Include="Source\Camera.cs" />
     <Compile Include="Source\Game1.cs" />
-    <Compile Include="Source\PrimitiveC.cs" />
-    <Compile Include="Source\VertexPositionColorNormal.cs" />
     <Compile Include="Source\Watch.cs" />
     <Compile Include="Source\WebServiceHandler.cs" />
     <Compile Include="Source\XMLwriter.cs" />
@@ -71,6 +69,10 @@
     <Compile Include="Source\Component\Quad.cs" />
     <Compile Include="Source\GUIElements\cButton.cs" />
     <Compile Include="Activity1.cs" />
+    <Compile Include="Source\Base\PrimitiveC.cs" />
+    <Compile Include="Source\Base\VertexPositionColorNormal.cs" />
+    <Compile Include="Source\Base\Indicator.cs" />
+    <Compile Include="Source\Base\IndicatorGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -91,6 +93,7 @@
   <ItemGroup>
     <Folder Include="Assets\Content\" />
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Source\Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

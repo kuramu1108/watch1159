@@ -94,7 +94,7 @@ namespace Watch1159
 			// TODO: Add your initialization logic here
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			effect = new BasicEffect (graphics.GraphicsDevice);
-			lightSetup ();
+//			lightSetup ();
 
 
 			// component init
@@ -178,7 +178,7 @@ namespace Watch1159
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.WhiteSmoke);
+			graphics.GraphicsDevice.Clear (Color.Black);
 			//TODO: Add your drawing code here
 			watch.Draw (effect);
 			Vector3 textPosition = new Vector3(0, 0, 0);
@@ -188,11 +188,18 @@ namespace Watch1159
 			effect.VertexColorEnabled = true;
 			effect.TextureEnabled = true;
 			effect.Texture = texture;
+
+			watch.DrawIndicator (effect, camera.View);
 //			Vector3 screenPosition = graphics.GraphicsDevice.Viewport.Project (textPosition, camera.ProjectionMatrix, camera.ViewMatrix, Matrix.Identity);
 //			Vector2 dialPosition;
 //			dialPosition.X = screenPosition.X;
 //			dialPosition.Y = screenPosition.Y;
-			DrawFace();
+
+
+			// testing !!!!!
+//			DrawFace();
+
+
 //			dials.Begin ();
 //			dials.DrawString (spriteFont, "hello, world", dialPosition, Color.Black, 0, spriteFont.MeasureString ("hello, world") / 2, 2, 0, 0);
 //			dials.End ();
@@ -262,9 +269,12 @@ namespace Watch1159
 						watch.SwitchComponent (TouchRay (gesture.Position.X, gesture.Position.Y));
 						break;
 					case GestureType.DoubleTap:
-						watch.Xml ();
-						WebServiceHandler requestHandler = new WebServiceHandler ();
-						requestHandler.postWithData ("", "");
+						/* 
+							testing
+						*/
+//						watch.Xml ();
+//						WebServiceHandler requestHandler = new WebServiceHandler ();
+//						requestHandler.postWithData ("", "");
 						//requestHandler.postWithDataFtp();
 						Android.Util.Log.Debug ("2TAP", "output xml");
 						break;
@@ -347,7 +357,6 @@ namespace Watch1159
 
 			Vector3 direction = farPoint - nearPoint;
 			direction.Normalize ();
-			Android.Util.Log.Debug("RAY", "created");
 			return new Ray (nearPoint, direction);
 		}
 	}

@@ -32,10 +32,11 @@ namespace Watch1159
 			OutRadius = outerR;
 			InRadius = innerR;
 			Segmentation = segmentation;
-			color = Color.Gray;
-			defColor = Color.Gray;
+			color = Color.LightGray;
+			defColor = Color.LightGray;
 			Construct ();
 			SetBoundingBox ();
+			InitIndicators ();
 		}
 
 		public override void SetBoundingBox() {
@@ -84,6 +85,7 @@ namespace Watch1159
 			//CreateCap (Segmentation, halfHeight, outerR, Vector3.Down);
 			CreateCap();
 			InitializePrimitive (device);
+
 		}
 
 
@@ -156,6 +158,54 @@ namespace Watch1159
 				triangleList.Add (vertices [indices [i]].Position);
 			}
 			return triangleList;
+		}
+
+		private void InitIndicators() {
+			float offset = .2f;
+
+			// side view
+			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
+
+			// Indicators for height
+			Indicator ind_1 = new Indicator(new Vector3(-OutRadius - offset, - Height/2, 0), Vector3.UnitY, Vector3.UnitZ, device);
+			Indicator ind_2 = new Indicator(new Vector3(-OutRadius - offset, Height/2, 0), -Vector3.UnitY, Vector3.UnitZ, device);
+			IndicatorGroup ig_height = new IndicatorGroup ("HEIGHT");
+			ig_height.AddToGroup (ind_1);
+			ig_height.AddToGroup (ind_2);
+			ig_height.Active ();
+			indicatorsSide.Add (ig_height);
+
+			indicatorView.Add ("SIDE", indicatorsSide);
+
+			// front view
+			List<IndicatorGroup> indicatorsFront = new List<IndicatorGroup>();
+
+			// Indicators for Outer Radius
+			Indicator ind_3 = new Indicator(new Vector3((OutRadius+ offset) / 1.4f, Height/2, (OutRadius+ offset) / 1.4f), new Vector3(-1, 0, -1), new Vector3(-1, 0, 1), device);
+			Indicator ind_4 = new Indicator(new Vector3((InRadius-offset) / 1.4f, Height/2, (InRadius-offset) / 1.4f), new Vector3(1, 0, 1), new Vector3(1, 0, -1), device);
+			IndicatorGroup ig_outradius = new IndicatorGroup ("OUTERRADIUS");
+			ig_outradius.AddToGroup (ind_3);
+			ig_outradius.AddToGroup (ind_4);
+			ig_outradius.Active ();
+			indicatorsFront.Add (ig_outradius);
+
+			Indicator ind_5 = new Indicator(new Vector3(0, Height/2, (OutRadius+ offset)), -Vector3.UnitZ, Vector3.UnitX, device);
+			Indicator ind_6 = new Indicator(new Vector3(0, Height/2, -(OutRadius+offset)), Vector3.UnitZ, Vector3.UnitX, device);
+			IndicatorGroup ig_vert = new IndicatorGroup ("VERT");
+			ig_vert.AddToGroup (ind_5);
+			ig_vert.AddToGroup (ind_6);
+			indicatorsFront.Add (ig_vert);
+
+			Indicator ind_7 = new Indicator(new Vector3((OutRadius+ offset), Height/2, 0), -Vector3.UnitX, Vector3.UnitZ, device);
+			Indicator ind_8 = new Indicator(new Vector3(-(OutRadius+offset), Height/2, 0), Vector3.UnitX, Vector3.UnitZ, device);
+			IndicatorGroup ig_hori = new IndicatorGroup ("HORI");
+			ig_hori.AddToGroup (ind_7);
+			ig_hori.AddToGroup (ind_8);
+			indicatorsFront.Add (ig_hori);
+
+			indicatorView.Add ("FRONT", indicatorsFront);
+
+
 		}
 	}
 }

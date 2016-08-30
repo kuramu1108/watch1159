@@ -137,11 +137,16 @@ namespace Watch1159
 			lug.Draw (effect);
 			bezel.Draw (effect);
 			bottom.Draw (effect);
+
 			// bounding box debug methods
 //			case_.DrawBoundingBox (effect);
 //			lug.DrawBoundingBox (effect);
 //			bezel.DrawBoundingBox (effect);
 //			bottom.DrawBoundingBox (effect);
+		}
+
+		public void DrawIndicator(Effect effect, string view) {
+			selected.DrawIndicator (effect, view);
 		}
 
 		// vertex update method

@@ -30,8 +30,8 @@ namespace Watch1159
 			CaseHeight = caseheight;
 			OuterRadius = outerR;
 			Segmentation = tessellation;
-			color = Color.MistyRose;
-			defColor = Color.MistyRose;
+			color = Color.LightGray;
+			defColor = Color.LightGray;
 			Construct ();
 			SetBoundingBox();
 		}
@@ -124,5 +124,7 @@ namespace Watch1159
 			}
 			return triangleList;
 		}
+
+
 	}
 }
