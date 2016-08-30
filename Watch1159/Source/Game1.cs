@@ -94,7 +94,7 @@ namespace Watch1159
 			// TODO: Add your initialization logic here
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			effect = new BasicEffect (graphics.GraphicsDevice);
-//			lightSetup ();
+			lightSetup ();
 
 
 			// component init
@@ -178,9 +178,11 @@ namespace Watch1159
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.Black);
+			graphics.GraphicsDevice.Clear (Color.White);
 			//TODO: Add your drawing code here
 			watch.Draw (effect);
+			watch.DrawIndicator (effect, camera.View);
+
 			Vector3 textPosition = new Vector3(0, 0, 0);
 
 			effect.View = camera.ViewMatrix;
@@ -189,7 +191,7 @@ namespace Watch1159
 			effect.TextureEnabled = true;
 			effect.Texture = texture;
 
-			watch.DrawIndicator (effect, camera.View);
+
 //			Vector3 screenPosition = graphics.GraphicsDevice.Viewport.Project (textPosition, camera.ProjectionMatrix, camera.ViewMatrix, Matrix.Identity);
 //			Vector2 dialPosition;
 //			dialPosition.X = screenPosition.X;

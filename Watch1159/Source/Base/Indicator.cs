@@ -6,7 +6,8 @@ namespace Watch1159
 {
 	public class Indicator
 	{
-		VertexPositionColor[] vertices  = new VertexPositionColor[3];
+//		VertexPositionColor[] vertices  = new VertexPositionColor[3];
+		VertexPositionColorNormal[] vertices = new VertexPositionColorNormal[3];
 		Vector3 orientation;
 		Vector3 platVector;
 		Vector3 top;
@@ -20,18 +21,19 @@ namespace Watch1159
 			this.top = top;
 			this.device = device;
 			PopulateTriangle ();
+			UpdateNormal ();
 		}
 
 		public void Draw(Effect effect) {
 			foreach (EffectPass effectPass in effect.CurrentTechnique.Passes) {
-				effectPass.Apply ();
-				device.DrawUserPrimitives(PrimitiveType.TriangleList, vertices, 0, 1, VertexPositionColor.VertexDeclaration);
+//				effectPass.Apply ();
+				device.DrawUserPrimitives(PrimitiveType.TriangleList, vertices, 0, 1, VertexPositionColorNormal.VertexDeclaration);
 			}
 		}
 
-		public void UpdatePosition(Vector3[] positions) {
+		public void UpdateNormal() {
 			for (int i = 0; i < 3; i++) {
-				vertices [i].Position = positions [i];
+				vertices [i].Normal = Vector3.UnitY;
 			}
 		}
 
