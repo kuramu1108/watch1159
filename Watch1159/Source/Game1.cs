@@ -267,7 +267,6 @@ namespace Watch1159
 						}
 						break;
 					case GestureType.Hold:
-						//watch.SwitchComponent ();
 						watch.SwitchComponent (TouchRay (gesture.Position.X, gesture.Position.Y));
 						break;
 					case GestureType.DoubleTap:
@@ -278,7 +277,8 @@ namespace Watch1159
 //						WebServiceHandler requestHandler = new WebServiceHandler ();
 //						requestHandler.postWithData ("", "");
 						//requestHandler.postWithDataFtp();
-						Android.Util.Log.Debug ("2TAP", "output xml");
+//						Android.Util.Log.Debug ("2TAP", "output xml");
+						watch.SwitchIndicator(TouchRay (gesture.Position.X, gesture.Position.Y), camera.View);
 						break;
 					case GestureType.Pinch:
 						watch.UpdateVertex (gameTime, gesture, camera.View);

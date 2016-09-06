@@ -12,6 +12,9 @@ namespace Watch1159
 		Vector3 platVector;
 		Vector3 top;
 		GraphicsDevice device;
+		float scale = 0.5f;
+
+		public BoundingSphere sphere;
 
 
 		public Indicator (Vector3 top, Vector3 orientation, Vector3 platVector, GraphicsDevice device)
@@ -22,6 +25,7 @@ namespace Watch1159
 			this.device = device;
 			PopulateTriangle ();
 			UpdateNormal ();
+			SetBoundingBox ();
 		}
 
 		public void Draw(Effect effect) {
@@ -61,13 +65,22 @@ namespace Watch1159
 			vertices [0].Position = top;
 			vertices [0].Color = Color.Gray;
 
-			float ver = 0.87f/2;
-			float hor = 0.5f/2;
+			float ver = scale * 1.7f;
+			float hor = scale;
 
-			vertices [1].Position = new Vector3 (top.X - orientation.X *  ver+ platVector.X * hor, top.Y - orientation.Y * ver + platVector.Y * hor, top.Z - orientation.Z * ver + platVector.Z * hor);
+			vertices [1].Position = new Vector3 (top.X - orientation.X * ver + platVector.X * hor, top.Y - orientation.Y * ver + platVector.Y * hor, top.Z - orientation.Z * ver + platVector.Z * hor);
 			vertices [1].Color = Color.Gray;
 			vertices [2].Position = new Vector3 (top.X - orientation.X * ver - platVector.X * hor, top.Y - orientation.Y * ver - platVector.Y * hor, top.Z - orientation.Z * ver - platVector.Z * hor);
 			vertices [2].Color = Color.Gray;
+		}
+
+		private void SetBoundingBox() {
+			Vector3 center = GetCenter ();
+			sphere = new BoundingSphere (center, scale * 1.7f);
+		}
+
+		private Vector3 GetCenter() {
+			return (vertices [0].Position + vertices [1].Position + vertices [2].Position) / 3;
 		}
 	}
 }

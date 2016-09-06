@@ -65,7 +65,7 @@ namespace Watch1159
 
 			bezelHeight = 1.5f;
 			bezelOutRadius = 7;
-			bezelInRadius = 6;
+			bezelInRadius = 6.5f;
 			bezelSegmentation = 32;
 
 			bottomHeight = 0.5f;
@@ -229,24 +229,6 @@ namespace Watch1159
 			XMLwriter.WriteXML ("trilist.xml", triangleList);
 		}
 
-		public void SwitchComponent() {
-			for (int i = 0; i < components.Length; i++) {
-				components [i].color = components[i].defColor;
-			}
-			selectedIndex += 1;
-			if (selectedIndex == 4)
-				selectedIndex = 0;
-			// reset the pre selected one
-			selected.Reset ();
-			selected.Construct ();
-			selected = components [selectedIndex];
-			// highlight the selected one
-			selected.color = selColor;
-			selected.Reset ();
-			selected.Construct ();
-
-		}
-
 		public void SwitchComponent(Ray ray) {
 			PrimitiveC result = null;
 			float? closestIntersection = float.MaxValue;
@@ -267,6 +249,10 @@ namespace Watch1159
 				selected.Reset ();
 				selected.Construct ();
 			}
+		}
+
+		public void SwitchIndicator(Ray ray, String view) {
+			selected.IndicatorIntersect (ray, view);
 		}
 	}
 }

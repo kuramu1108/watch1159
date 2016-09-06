@@ -173,6 +173,7 @@ namespace Watch1159
 			ig_height.AddToGroup (ind_1);
 			ig_height.AddToGroup (ind_2);
 			ig_height.Active ();
+
 			indicatorsSide.Add (ig_height);
 
 			indicatorView.Add ("SIDE", indicatorsSide);

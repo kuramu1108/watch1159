@@ -173,8 +173,8 @@ namespace Watch1159
 			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
 
 			// Indicators for height
-			Indicator ind_1 = new Indicator(new Vector3(-OuterRadius - offset * 10, CaseHeight/2, 0), Vector3.UnitY, Vector3.UnitZ, device);
-			Indicator ind_2 = new Indicator(new Vector3(-OuterRadius - offset * 10, CaseHeight/2+Height, 0), -Vector3.UnitY, Vector3.UnitZ, device);
+			Indicator ind_1 = new Indicator(new Vector3(-OuterRadius - offset * 5, CaseHeight/2, 0), Vector3.UnitY, Vector3.UnitZ, device);
+			Indicator ind_2 = new Indicator(new Vector3(-OuterRadius - offset * 5, CaseHeight/2+Height, 0), -Vector3.UnitY, Vector3.UnitZ, device);
 			IndicatorGroup ig_height = new IndicatorGroup ("HEIGHT");
 			ig_height.AddToGroup (ind_1);
 			ig_height.AddToGroup (ind_2);

@@ -18,7 +18,9 @@ namespace Watch1159
 	{
 		protected List<VertexPositionColorNormal> vertices = new List<VertexPositionColorNormal>();
 		protected List<ushort> indices = new List<ushort>();
+
 		protected Dictionary<string, List<IndicatorGroup> > indicatorView = new Dictionary<string, List<IndicatorGroup>>();
+
 		public VertexBuffer vertexBuffer { get; set;}
 		public IndexBuffer indexBuffer { get; set;}
 		// added
@@ -26,6 +28,7 @@ namespace Watch1159
 		public Color defColor { get; set; }
 		public BoundingBox box { get; set; }
 		public BoundingBoxBuffers buffers {get; set;}
+		public IndicatorGroup currentIndicatorGroup { get; set; }
 
 		protected void AddVertex (Vector3 position, Color color, Vector3 normal)
 		{
@@ -124,8 +127,29 @@ namespace Watch1159
 
 		// indicator drawing
 		public void DrawIndicator(Effect effect, string view) {
-			foreach (IndicatorGroup inds in indicatorView[view])
+			foreach (IndicatorGroup inds in indicatorView[view]) {
 				inds.Draw (effect);
+			}
+		}
+
+		public void IndicatorIntersect(Ray ray, String view) {
+			IndicatorGroup result = null;
+			float? closestIntersection = float.MaxValue;
+			foreach (IndicatorGroup group in indicatorView[view]) {
+				var intersectionResult = group.Intersects (ray);
+				if (intersectionResult != null && intersectionResult < closestIntersection) {
+					closestIntersection = intersectionResult;
+					result = group;
+				}
+			}
+			if (result != null) {
+				foreach (var group in indicatorView[view]) {
+					if (group.active) {
+						group.Inactive ();
+					}
+				}
+				result.Active ();
+			}
 		}
 	}
 }

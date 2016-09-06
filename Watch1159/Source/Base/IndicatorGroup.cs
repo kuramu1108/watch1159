@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Watch1159
 {
 	public class IndicatorGroup
 	{
+		public bool active = false;
+
 		private List<Indicator> indicators;
 		String Target { get; set; }
 
@@ -26,13 +29,26 @@ namespace Watch1159
 		}
 
 		public void Inactive() {
+			active = false;
 			foreach (Indicator indicator in indicators)
 				indicator.Inactive ();
 		}
 
 		public void Active() {
+			active = true;
 			foreach (Indicator indicator in indicators)
 				indicator.Active ();
+		}
+
+		public float? Intersects(Ray ray) {
+			float? closestIntersection = float.MaxValue;
+			foreach (var indicator in indicators) {
+				var intersectionResult = ray.Intersects (indicator.sphere);
+				if (intersectionResult != null && intersectionResult < closestIntersection) {
+					closestIntersection = intersectionResult;
+				}
+			}
+			return closestIntersection;
 		}
 	}
 }
