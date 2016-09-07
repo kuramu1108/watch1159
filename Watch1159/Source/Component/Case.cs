@@ -160,8 +160,10 @@ namespace Watch1159
 			return triangleList;
 		}
 
-		private void InitIndicators() {
+		public override void InitIndicators() {
 			float offset = .2f;
+			// init view dict
+			indicatorView = new Dictionary<string, List<IndicatorGroup>>();
 
 			// side view
 			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
@@ -192,14 +194,14 @@ namespace Watch1159
 
 			Indicator ind_5 = new Indicator(new Vector3(0, Height/2, (OutRadius+ offset)), -Vector3.UnitZ, Vector3.UnitX, device);
 			Indicator ind_6 = new Indicator(new Vector3(0, Height/2, -(OutRadius+offset)), Vector3.UnitZ, Vector3.UnitX, device);
-			IndicatorGroup ig_vert = new IndicatorGroup ("VERT");
+			IndicatorGroup ig_vert = new IndicatorGroup ("VERTICAL");
 			ig_vert.AddToGroup (ind_5);
 			ig_vert.AddToGroup (ind_6);
 			indicatorsFront.Add (ig_vert);
 
 			Indicator ind_7 = new Indicator(new Vector3((OutRadius+ offset), Height/2, 0), -Vector3.UnitX, Vector3.UnitZ, device);
 			Indicator ind_8 = new Indicator(new Vector3(-(OutRadius+offset), Height/2, 0), Vector3.UnitX, Vector3.UnitZ, device);
-			IndicatorGroup ig_hori = new IndicatorGroup ("HORI");
+			IndicatorGroup ig_hori = new IndicatorGroup ("HORIZONTAL");
 			ig_hori.AddToGroup (ind_7);
 			ig_hori.AddToGroup (ind_8);
 			indicatorsFront.Add (ig_hori);

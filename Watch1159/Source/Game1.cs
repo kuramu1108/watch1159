@@ -28,12 +28,15 @@ namespace Watch1159
 		Watch watch;
 		Quad face;
 
+		// APP Logic
 		enum AppState
 		{
 			BASIC,
 			MENU,
 			DESIGN,
 		}
+
+		bool showIndicator = true;
 			
 		cButton btnMenu;
 		cButton btnTitle;
@@ -181,7 +184,8 @@ namespace Watch1159
 			graphics.GraphicsDevice.Clear (Color.White);
 			//TODO: Add your drawing code here
 			watch.Draw (effect);
-			watch.DrawIndicator (effect, camera.View);
+			if (showIndicator)
+				watch.DrawIndicator (effect, camera.View);
 
 			Vector3 textPosition = new Vector3(0, 0, 0);
 
@@ -282,8 +286,11 @@ namespace Watch1159
 						break;
 					case GestureType.Pinch:
 						watch.UpdateVertex (gameTime, gesture, camera.View);
+						showIndicator = false;
 						break;
 					case GestureType.PinchComplete:
+						showIndicator = true;
+						watch.UpdateIndicator (camera.View);
 						watch.UpdateBB ();
 						break;
 					case GestureType.HorizontalDrag:

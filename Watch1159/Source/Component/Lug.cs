@@ -121,8 +121,18 @@ namespace Watch1159
 			HalfSideWidth += scale / 2;
 			if (HalfSideWidth <= 0.5f)
 				HalfSideWidth = 0.5f;
-			if (HalfSideWidth >= 1) 
-				HalfSideWidth = 1;
+			if (HalfSideWidth >= 0.9f) 
+				HalfSideWidth = 0.9f;
+			Reset ();
+			Construct ();
+		}
+
+		public void UpdateHeight(float scale) {
+			Height += scale;
+			if (Height <= 1)
+				Height = 1;
+			if (Height >= 3)
+				Height = 3;
 			Reset ();
 			Construct ();
 		}
@@ -278,7 +288,7 @@ namespace Watch1159
 			return triangleList;
 		}
 
-		public void InitIndicators() {
+		public override void InitIndicators() {
 			/***** Parameter reference
 			Height
 			BottomWidth
@@ -292,6 +302,8 @@ namespace Watch1159
 			*******/
 
 			float offset = .2f;
+			// init view dict
+			indicatorView = new Dictionary<string, List<IndicatorGroup>>();
 
 			// side view
 			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
@@ -332,8 +344,6 @@ namespace Watch1159
 			ig_bot.AddToGroup (ind_5);
 			ig_bot.AddToGroup (ind_6);
 			indicatorsFront.Add (ig_bot);
-
-
 
 			indicatorView.Add ("FRONT", indicatorsFront);
 		}

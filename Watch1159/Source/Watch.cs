@@ -155,8 +155,19 @@ namespace Watch1159
 			if (scale != 0) { 
 				if (selected.Equals (case_)) { // update case
 					if (view.Equals ("FRONT")) {
-						case_.UpdateOuterRadius (scale);
-						lug.UpdateCaseRadius (scale);
+						String target = case_.GetActiveIndicatorTarget (view);
+						switch (target) {
+						case "OUTERRADIUS":
+							case_.UpdateOuterRadius (scale);
+							lug.UpdateCaseRadius (scale);
+							break;
+						case "VERTICAL":
+							break;
+						case "HORIZONTAL":
+							break;
+						default:
+							break;
+						}
 					} else if (view.Equals ("SIDE")) {
 						case_.UpdateHeight (scale);
 						bezel.UpdateCaseHeight (scale);
@@ -164,25 +175,65 @@ namespace Watch1159
 					}
 				} else if (selected.Equals (bezel)) { // update bezel
 					if (view.Equals ("FRONT")) {
-						bezel.UpdateOuterRadius (scale);
+						String target = case_.GetActiveIndicatorTarget (view);
+						switch (target) {
+						case "OUTERRADIUS":
+							bezel.UpdateOuterRadius (scale);
+							break;
+						case "VERTICAL":
+							break;
+						case "HORIZONTAL":
+							break;
+						default:
+							break;
+						}
 					} else if (view.Equals ("SIDE")) {
 						bezel.UpdateHeight (scale);
 					}
 				} else if (selected.Equals (lug)) { // update lug
 					if (view.Equals ("FRONT")) {
-						float HalfScreenHeight = device.Viewport.Height / 2;
-						if (gesture.Position.Y <= HalfScreenHeight && gesture.Position2.Y <= HalfScreenHeight) {
+//						float HalfScreenHeight = device.Viewport.Height / 2;
+//						if (gesture.Position.Y <= HalfScreenHeight && gesture.Position2.Y <= HalfScreenHeight) {
+//							lug.UpdateTopWidth (scale);
+//						} else {
+//							lug.UpdateBottomWidth (scale);
+//						}
+						String target = lug.GetActiveIndicatorTarget (view);
+						switch (target) {
+						case "TOPWIDTH":
 							lug.UpdateTopWidth (scale);
-						} else {
+							break;
+						case "BOTTOMWIDTH":
 							lug.UpdateBottomWidth (scale);
+							break;
+						default:
+							break;
 						}
 					} else if (view.Equals ("SIDE")) {
-						lug.UpdateSideWidth (scale);
+						String target = lug.GetActiveIndicatorTarget (view);
+						switch (target) {
+						case "HEIGHT":
+							lug.UpdateHeight (scale);
+							break;
+						case "SIDEWIDTH":
+							lug.UpdateSideWidth (scale);
+							break;
+						default:
+							break;
+						}
 					}
 				} else if (selected.Equals (bottom)) { // update bottom
 					if (view.Equals ("FRONT")) {
 					}
 				}
+			}
+		}
+
+		// new vertex update method after implementing the indicator
+		public void UpdateVertex(GestureSample gesture, String view) {
+			float scale = Scale (gesture);
+			if (scale != 0) {
+				
 			}
 		}
 
@@ -253,6 +304,17 @@ namespace Watch1159
 
 		public void SwitchIndicator(Ray ray, String view) {
 			selected.IndicatorIntersect (ray, view);
+		}
+
+		public void UpdateIndicator(String view) {
+			selected.InitIndicators ();
+			if (selected.Equals (case_)) { // update case
+				if (view.Equals ("FRONT")) {
+					lug.InitIndicators ();
+				} else if (view.Equals ("SIDE")) {
+					bezel.InitIndicators ();
+				}
+			}
 		}
 	}
 }

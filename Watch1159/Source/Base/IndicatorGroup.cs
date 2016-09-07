@@ -10,7 +10,7 @@ namespace Watch1159
 		public bool active = false;
 
 		private List<Indicator> indicators;
-		String Target { get; set; }
+		public String Target { get; set; }
 
 		public IndicatorGroup (String target)
 		{
