@@ -303,7 +303,7 @@ namespace Watch1159
 
 			float offset = .2f;
 			// init view dict
-			indicatorView = new Dictionary<string, List<IndicatorGroup>>();
+			indicatorView = new Dictionary<WatchView, List<IndicatorGroup>>();
 
 			// side view
 			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
@@ -311,7 +311,7 @@ namespace Watch1159
 			// Indicators for height
 			Indicator ind_1 = new Indicator(TopLeft * CaseRadius + Vector3.UnitZ * Height + Vector3.Left * TopWidth, -Vector3.UnitZ, Vector3.UnitY, device);
 			Indicator ind_2 = new Indicator(TopLeft * CaseRadius + Vector3.Left * BottomWidth, Vector3.UnitZ, Vector3.UnitY, device);
-			IndicatorGroup ig_height = new IndicatorGroup ("HEIGHT");
+			IndicatorGroup ig_height = new IndicatorGroup (Dimension.Height);
 			ig_height.AddToGroup (ind_1);
 			ig_height.AddToGroup (ind_2);
 			ig_height.Active ();
@@ -319,12 +319,12 @@ namespace Watch1159
 
 			Indicator ind_7 = new Indicator(TopLeft * CaseRadius + Vector3.UnitZ * Height/2 + Vector3.Left * TopWidth + Vector3.Up * HalfSideWidth, -Vector3.UnitY, Vector3.UnitZ, device);
 			Indicator ind_8 = new Indicator(TopLeft * CaseRadius + Vector3.UnitZ * Height/2 + Vector3.Left * TopWidth + Vector3.Down * HalfSideWidth, Vector3.UnitY, Vector3.UnitZ, device);
-			IndicatorGroup ig_side = new IndicatorGroup ("SIDEWIDTH");
+			IndicatorGroup ig_side = new IndicatorGroup (Dimension.SideWidth);
 			ig_side.AddToGroup (ind_7);
 			ig_side.AddToGroup (ind_8);
 			indicatorsSide.Add (ig_side);
 
-			indicatorView.Add ("SIDE", indicatorsSide);
+			indicatorView.Add (WatchView.Side, indicatorsSide);
 
 			// front view
 			List<IndicatorGroup> indicatorsFront = new List<IndicatorGroup>();
@@ -332,7 +332,7 @@ namespace Watch1159
 			// Indicators for Outer Radius
 			Indicator ind_3 = new Indicator(TopLeft * CaseRadius + Vector3.Up * (HalfSideWidth+offset) + Vector3.UnitZ * Height + Vector3.Left * TopWidth, Vector3.UnitX, Vector3.UnitZ, device);
 			Indicator ind_4 = new Indicator(TopLeft * CaseRadius + Vector3.Up * (HalfSideWidth+offset) + Vector3.UnitZ * Height, -Vector3.UnitX, Vector3.UnitZ, device);
-			IndicatorGroup ig_top = new IndicatorGroup ("TOPWIDTH");
+			IndicatorGroup ig_top = new IndicatorGroup (Dimension.TopWidth);
 			ig_top.AddToGroup (ind_3);
 			ig_top.AddToGroup (ind_4);
 			ig_top.Active ();
@@ -340,12 +340,12 @@ namespace Watch1159
 
 			Indicator ind_5 = new Indicator(TopLeft * CaseRadius + Vector3.Up * (HalfSideWidth+offset*5) + Vector3.Left * BottomWidth , Vector3.UnitX, Vector3.UnitZ, device);
 			Indicator ind_6 = new Indicator(TopLeft * CaseRadius + Vector3.Up * (HalfSideWidth+offset*5), -Vector3.UnitX, Vector3.UnitZ, device);
-			IndicatorGroup ig_bot = new IndicatorGroup ("BOTTOMWIDTH");
+			IndicatorGroup ig_bot = new IndicatorGroup (Dimension.BottomWidth);
 			ig_bot.AddToGroup (ind_5);
 			ig_bot.AddToGroup (ind_6);
 			indicatorsFront.Add (ig_bot);
 
-			indicatorView.Add ("FRONT", indicatorsFront);
+			indicatorView.Add (WatchView.Front, indicatorsFront);
 		}
 	}
 }

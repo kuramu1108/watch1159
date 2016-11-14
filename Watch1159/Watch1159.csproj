@@ -73,6 +73,8 @@
     <Compile Include="Source\Base\VertexPositionColorNormal.cs" />
     <Compile Include="Source\Base\Indicator.cs" />
     <Compile Include="Source\Base\IndicatorGroup.cs" />
+    <Compile Include="Source\Utility\WatchView.cs" />
+    <Compile Include="Source\Utility\Dimension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -94,6 +96,7 @@
     <Folder Include="Assets\Content\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Source\Base\" />
+    <Folder Include="Source\Utility\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

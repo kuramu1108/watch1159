@@ -169,7 +169,7 @@ namespace Watch1159
 		public override void InitIndicators() {
 			float offset = .2f;
 			// init view dict
-			indicatorView = new Dictionary<string, List<IndicatorGroup>>();
+			indicatorView = new Dictionary<WatchView, List<IndicatorGroup>>();
 
 			// side view
 			List<IndicatorGroup> indicatorsSide = new List<IndicatorGroup>();
@@ -177,13 +177,13 @@ namespace Watch1159
 			// Indicators for height
 			Indicator ind_1 = new Indicator(new Vector3(-OuterRadius - offset * 5, CaseHeight/2, 0), Vector3.UnitY, Vector3.UnitZ, device);
 			Indicator ind_2 = new Indicator(new Vector3(-OuterRadius - offset * 5, CaseHeight/2+Height, 0), -Vector3.UnitY, Vector3.UnitZ, device);
-			IndicatorGroup ig_height = new IndicatorGroup ("HEIGHT");
+			IndicatorGroup ig_height = new IndicatorGroup (Dimension.Height);
 			ig_height.AddToGroup (ind_1);
 			ig_height.AddToGroup (ind_2);
 			ig_height.Active ();
 			indicatorsSide.Add (ig_height);
 
-			indicatorView.Add ("SIDE", indicatorsSide);
+			indicatorView.Add (WatchView.Side, indicatorsSide);
 
 			// front view
 			List<IndicatorGroup> indicatorsFront = new List<IndicatorGroup>();
@@ -191,7 +191,7 @@ namespace Watch1159
 			// Indicators for Outer Radius
 			Indicator ind_3 = new Indicator(new Vector3((OuterRadius+ offset) / 1.4f, CaseHeight/2 + offset, (OuterRadius+ offset) / 1.4f), new Vector3(-1, 0, -1), new Vector3(-1, 0, 1), device);
 			Indicator ind_4 = new Indicator(new Vector3((InnerRadius-offset) / 1.4f, CaseHeight/2 + offset, (InnerRadius-offset) / 1.4f), new Vector3(1, 0, 1), new Vector3(1, 0, -1), device);
-			IndicatorGroup ig_outradius = new IndicatorGroup ("OUTERRADIUS");
+			IndicatorGroup ig_outradius = new IndicatorGroup (Dimension.OuterRadius);
 			ig_outradius.AddToGroup (ind_3);
 			ig_outradius.AddToGroup (ind_4);
 			ig_outradius.Active ();
@@ -199,19 +199,19 @@ namespace Watch1159
 
 			Indicator ind_5 = new Indicator(new Vector3(0, CaseHeight/2 + offset, (OuterRadius+ offset)), -Vector3.UnitZ, Vector3.UnitX, device);
 			Indicator ind_6 = new Indicator(new Vector3(0, CaseHeight/2 + offset, -(OuterRadius+offset)), Vector3.UnitZ, Vector3.UnitX, device);
-			IndicatorGroup ig_vert = new IndicatorGroup ("VERTICAL");
+			IndicatorGroup ig_vert = new IndicatorGroup (Dimension.Vertical);
 			ig_vert.AddToGroup (ind_5);
 			ig_vert.AddToGroup (ind_6);
 			indicatorsFront.Add (ig_vert);
 
 			Indicator ind_7 = new Indicator(new Vector3((OuterRadius+ offset), CaseHeight/2 + offset, 0), -Vector3.UnitX, Vector3.UnitZ, device);
 			Indicator ind_8 = new Indicator(new Vector3(-(OuterRadius+offset), CaseHeight/2 + offset, 0), Vector3.UnitX, Vector3.UnitZ, device);
-			IndicatorGroup ig_hori = new IndicatorGroup ("HORIZONTAL");
+			IndicatorGroup ig_hori = new IndicatorGroup (Dimension.Horizontal);
 			ig_hori.AddToGroup (ind_7);
 			ig_hori.AddToGroup (ind_8);
 			indicatorsFront.Add (ig_hori);
 
-			indicatorView.Add ("FRONT", indicatorsFront);
+			indicatorView.Add (WatchView.Front, indicatorsFront);
 
 
 		}

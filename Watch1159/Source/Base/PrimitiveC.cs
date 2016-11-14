@@ -28,7 +28,7 @@ namespace Watch1159
 		public BoundingBoxBuffers buffers {get; set;}
 		public IndicatorGroup currentIndicatorGroup { get; set; }
 
-		protected Dictionary<string, List<IndicatorGroup> > indicatorView;
+		protected Dictionary<WatchView, List<IndicatorGroup> > indicatorView;
 
 		protected void AddVertex (Vector3 position, Color color, Vector3 normal)
 		{
@@ -126,7 +126,7 @@ namespace Watch1159
 		// bounding box testing =============================================
 
 		// indicator drawing
-		public void DrawIndicator(Effect effect, string view) {
+		public void DrawIndicator(Effect effect, WatchView view) {
 			foreach (IndicatorGroup inds in indicatorView[view]) {
 				inds.Draw (effect);
 			}
@@ -135,7 +135,7 @@ namespace Watch1159
 		public virtual void InitIndicators() {
 		}
 
-		public void IndicatorIntersect(Ray ray, String view) {
+		public void IndicatorIntersect(Ray ray, WatchView view) {
 			IndicatorGroup result = null;
 			float? closestIntersection = float.MaxValue;
 			foreach (IndicatorGroup group in indicatorView[view]) {
@@ -155,13 +155,13 @@ namespace Watch1159
 			}
 		}
 
-		public String GetActiveIndicatorTarget(String view) {
+		public Dimension GetActiveIndicatorTarget(WatchView view) {
 			foreach (IndicatorGroup group in indicatorView[view]) {
 				if (group.active) {
 					return group.Target;
 				}
 			}
-			return null;
+			return Dimension.None;
 		}
 	}
 }

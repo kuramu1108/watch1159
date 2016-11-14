@@ -12,7 +12,7 @@ namespace Watch1159
 		Vector3 position = new Vector3 (0, 40, 0);
 
 		float angle;
-		public String View { get; set; }
+		public WatchView View { get; set; }
 
 		public Matrix ViewMatrix {
 			get {
@@ -43,7 +43,7 @@ namespace Watch1159
 		public Camera (GraphicsDevice graphicsDevice)
 		{
 			this.graphicsDevice = graphicsDevice;
-			View = "FRONT";
+			View = WatchView.Front;
 		}
 
 		public void Update(GameTime gameTime, GestureSample gesture)
@@ -76,10 +76,10 @@ namespace Watch1159
 			//Android.Util.Log.Debug ("Posotioin", "X: " + position.X.ToString() + "Y: " + position.Y.ToString());
 			 
 			if (position.Y < 20 && position.Y> -20) {
-				View = "SIDE";
+				View = WatchView.Side;
 				//Android.Util.Log.Debug ("CAMERA", View);
 			} else {
-				View = "FRONT";
+				View = WatchView.Front;
 				//Android.Util.Log.Debug ("CAMERA", View);
 			}
 		}

@@ -145,77 +145,77 @@ namespace Watch1159
 //			bottom.DrawBoundingBox (effect);
 		}
 
-		public void DrawIndicator(Effect effect, string view) {
+		public void DrawIndicator(Effect effect, WatchView view) {
 			selected.DrawIndicator (effect, view);
 		}
 
 		// vertex update method
-		public void UpdateVertex(GameTime gameTime, GestureSample gesture, String view) {
+		public void UpdateVertex(GameTime gameTime, GestureSample gesture, WatchView view) {
 			float scale = Scale (gesture);
 			if (scale != 0) { 
 				if (selected.Equals (case_)) { // update case
-					if (view.Equals ("FRONT")) {
-						String target = case_.GetActiveIndicatorTarget (view);
+					if (view == WatchView.Front) {
+						Dimension target = case_.GetActiveIndicatorTarget (view);
 						switch (target) {
-						case "OUTERRADIUS":
+						case Dimension.OuterRadius:
 							case_.UpdateOuterRadius (scale);
 							lug.UpdateCaseRadius (scale);
 							break;
-						case "VERTICAL":
+						case Dimension.Vertical:
 							break;
-						case "HORIZONTAL":
+						case Dimension.Horizontal:
 							break;
 						default:
 							break;
 						}
-					} else if (view.Equals ("SIDE")) {
+					} else if (view == WatchView.Side) {
 						case_.UpdateHeight (scale);
 						bezel.UpdateCaseHeight (scale);
 						bottom.UpdateCaseHeight (scale);
 					}
 				} else if (selected.Equals (bezel)) { // update bezel
-					if (view.Equals ("FRONT")) {
-						String target = case_.GetActiveIndicatorTarget (view);
+					if (view == WatchView.Front) {
+						Dimension target = case_.GetActiveIndicatorTarget (view);
 						switch (target) {
-						case "OUTERRADIUS":
+						case Dimension.OuterRadius:
 							bezel.UpdateOuterRadius (scale);
 							break;
-						case "VERTICAL":
+						case Dimension.Vertical:
 							break;
-						case "HORIZONTAL":
+						case Dimension.Horizontal:
 							break;
 						default:
 							break;
 						}
-					} else if (view.Equals ("SIDE")) {
+					} else if (view == WatchView.Side) {
 						bezel.UpdateHeight (scale);
 					}
 				} else if (selected.Equals (lug)) { // update lug
-					if (view.Equals ("FRONT")) {
+					if (view == WatchView.Front) {
 //						float HalfScreenHeight = device.Viewport.Height / 2;
 //						if (gesture.Position.Y <= HalfScreenHeight && gesture.Position2.Y <= HalfScreenHeight) {
 //							lug.UpdateTopWidth (scale);
 //						} else {
 //							lug.UpdateBottomWidth (scale);
 //						}
-						String target = lug.GetActiveIndicatorTarget (view);
+						Dimension target = lug.GetActiveIndicatorTarget (view);
 						switch (target) {
-						case "TOPWIDTH":
+						case Dimension.TopWidth:
 							lug.UpdateTopWidth (scale);
 							break;
-						case "BOTTOMWIDTH":
+						case Dimension.BottomWidth:
 							lug.UpdateBottomWidth (scale);
 							break;
 						default:
 							break;
 						}
-					} else if (view.Equals ("SIDE")) {
-						String target = lug.GetActiveIndicatorTarget (view);
+					} else if (view == WatchView.Side) {
+						Dimension target = lug.GetActiveIndicatorTarget (view);
 						switch (target) {
-						case "HEIGHT":
+						case Dimension.Height:
 							lug.UpdateHeight (scale);
 							break;
-						case "SIDEWIDTH":
+						case Dimension.SideWidth:
 							lug.UpdateSideWidth (scale);
 							break;
 						default:
@@ -223,14 +223,14 @@ namespace Watch1159
 						}
 					}
 				} else if (selected.Equals (bottom)) { // update bottom
-					if (view.Equals ("FRONT")) {
+					if (view == WatchView.Front) {
 					}
 				}
 			}
 		}
 
 		// new vertex update method after implementing the indicator
-		public void UpdateVertex(GestureSample gesture, String view) {
+		public void UpdateVertex(GestureSample gesture, WatchView view) {
 			float scale = Scale (gesture);
 			if (scale != 0) {
 				
@@ -302,16 +302,16 @@ namespace Watch1159
 			}
 		}
 
-		public void SwitchIndicator(Ray ray, String view) {
+		public void SwitchIndicator(Ray ray, WatchView view) {
 			selected.IndicatorIntersect (ray, view);
 		}
 
-		public void UpdateIndicator(String view) {
+		public void UpdateIndicator(WatchView view) {
 			selected.InitIndicators ();
 			if (selected.Equals (case_)) { // update case
-				if (view.Equals ("FRONT")) {
+				if (view == WatchView.Front) {
 					lug.InitIndicators ();
-				} else if (view.Equals ("SIDE")) {
+				} else if (view == WatchView.Side) {
 					bezel.InitIndicators ();
 				}
 			}

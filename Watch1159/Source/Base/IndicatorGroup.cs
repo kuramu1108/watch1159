@@ -10,9 +10,9 @@ namespace Watch1159
 		public bool active = false;
 
 		private List<Indicator> indicators;
-		public String Target { get; set; }
+		public Dimension Target { get; set; }
 
-		public IndicatorGroup (String target)
+		public IndicatorGroup (Dimension target)
 		{
 			indicators = new List<Indicator> ();
 			this.Target = target;
